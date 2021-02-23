@@ -13,20 +13,18 @@ class Startup
   end
 
   def valid_title?(title)
-    @salaries.include?(title)
+    @salaries.has_key?(title)
   end
 
   def >(other_startup)
-    self.funding > other_startup.funding
+    @funding > other_startup.funding
   end
 
   def hire(employee_name, title)
     if !valid_title?(title)
       raise StandardError.new "Invalid Title"
-    else
-      employee = Employee.new(employee_name, title)
-      @employees << employee
     end
+      @employees << Employee.new(employee_name, title)
   end
 
   def size
@@ -35,12 +33,10 @@ class Startup
 
   def pay_employee(employee)
     salary = @salaries[employee.title]
-    if salary < @funding
-      @funding -= salary
-      employee.pay(salary)
-    else
-      raise StandardError.new "Not enough Funding!!!"
-    end
+    raise StandardError.new "Not enough Funding!!!" if salary > @funding
+
+    @funding -= salary
+    employee.pay(salary)
   end
 
   def payday
@@ -62,12 +58,14 @@ class Startup
 
   def acquire(other)
     @funding += other.funding
+
     other.salaries.each do |title, salary|
       if !@salaries[title]
         @salaries[title] = salary
       end
     end
-    other.employees.each {|employee| @employees << employee}
+
+    @employees = @employees + other.employees
     other.close
   end
 
