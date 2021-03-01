@@ -14,6 +14,28 @@ class Ghost
     @players = [p1, p2]
   end
 
+  def play_round
+
+    # until word
+    word = false
+    until word do
+      take_turn
+      if is_word?(fragment)
+        word = true
+      end
+      next_player!
+    end
+    puts "#{previous_player.name} made the word, #{fragment.upcase}"
+    puts "And loses"
+    # should get guess from player
+    # check if valid
+    # check if word
+    # change player if not
+    # repeat
+    # end game
+  end
+
+  #private
 
   attr_reader :players, :dictionary, :fragment
 
@@ -22,33 +44,51 @@ class Ghost
   end
 
   def previous_player
+    players.last
   end
 
   def next_player!
     players.rotate!
   end
 
+  def add_letter(letter)
+    fragment << letter
+  end
+
   def valid_play?(letter)
-    return false if string.length != 1
-    return false unless ALPHABET.include?(string)
+    return false if letter.length != 1
+    return false unless ALPHABET.include?(letter)
 
     check = fragment + letter
     dictionary.any? {|word| word.start_with?(check)}
   end
 
-  def take_turn(player)
+  def take_turn
+    system("clear")
+    letter = nil
 
+    until letter
+      letter = current_player.guess(fragment)
+      unless valid_play?(letter)
+        current_player.alert_invalid_guess(letter)
+        letter = nil
+      end
+    end
+
+    add_letter(letter)
+    puts "#{current_player.name} added #{letter}."
   end
 
   def is_word?(frag)
     dictionary.include?(frag)
   end
 
-  def play_round
-  end
 
 end
 
 # if __FILE__ == $PROGRAM_NAME
-  $ghost = Ghost.new("p1", "p2")
+  $ghost = Ghost.new(
+    Player.new("Uzair"),
+    Player.new("Cody")
+  )
 # end
