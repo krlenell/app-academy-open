@@ -1,5 +1,4 @@
 class Player
-
   def initialize(name)
     @name = name
   end
@@ -13,9 +12,9 @@ class Player
 
   def alert_invalid_guess(letter)
     puts "Your guess #{letter} is invalid"
-    puts "It must be a letter and add to make a word"
-    puts "Please type a new letter"
-    puts "====================="
+    puts 'It must be a letter and add to make a word'
+    puts 'Please type a new letter'
+    puts '====================='
   end
 
   private
@@ -24,5 +23,4 @@ class Player
     puts "The current letters are #{fragment}"
     puts "#{name}, what letter will you add?"
   end
-
 end

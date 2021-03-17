@@ -7,9 +7,7 @@ class GuessingGame
     @game_over = false
   end
 
-  def num_attempts
-    @num_attempts
-  end
+  attr_reader :num_attempts
 
   def game_over?
     @game_over

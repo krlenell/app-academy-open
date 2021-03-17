@@ -1,10 +1,9 @@
-require "employee"
+require 'employee'
 
 class Startup
   attr_reader :name, :funding, :salaries, :employees
 
-
-  #salaries: {"title" => salary(number)}
+  # salaries: {"title" => salary(number)}
   def initialize(name, funding, salaries)
     @name = name
     @funding = funding
@@ -16,15 +15,14 @@ class Startup
     @salaries.has_key?(title)
   end
 
-  def >(other_startup)
-    @funding > other_startup.funding
+  def >(other)
+    @funding > other.funding
   end
 
   def hire(employee_name, title)
-    if !valid_title?(title)
-      raise StandardError.new "Invalid Title"
-    end
-      @employees << Employee.new(employee_name, title)
+    raise StandardError, 'Invalid Title' unless valid_title?(title)
+
+    @employees << Employee.new(employee_name, title)
   end
 
   def size
@@ -33,14 +31,14 @@ class Startup
 
   def pay_employee(employee)
     salary = @salaries[employee.title]
-    raise StandardError.new "Not enough Funding!!!" if salary > @funding
+    raise StandardError, 'Not enough Funding!!!' if salary > @funding
 
     @funding -= salary
     employee.pay(salary)
   end
 
   def payday
-    @employees.each {|employee| pay_employee employee}
+    @employees.each { |employee| pay_employee employee }
   end
 
   def average_salary
@@ -60,17 +58,10 @@ class Startup
     @funding += other.funding
 
     other.salaries.each do |title, salary|
-      if !@salaries[title]
-        @salaries[title] = salary
-      end
+      @salaries[title] = salary unless @salaries[title]
     end
 
-    @employees = @employees + other.employees
+    @employees += other.employees
     other.close
   end
-
-
-
-
-
 end

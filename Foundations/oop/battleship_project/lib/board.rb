@@ -3,12 +3,12 @@ class Board
 
   def self.print_grid(grid)
     grid.each do |row|
-      puts row.join(" ")
+      puts row.join(' ')
     end
   end
 
   def initialize(n)
-    @grid = Array.new(n) {Array.new(n, :N)}
+    @grid = Array.new(n) { Array.new(n, :N) }
     @size = n * n
   end
 
@@ -40,7 +40,7 @@ class Board
   def place_random_ships
     max = 0.25 * size
 
-    while self.num_ships < max
+    while num_ships < max
       row = rand(0...@grid.length)
       col = rand(0...@grid.length)
       self[[row, col]] = :S
@@ -66,5 +66,4 @@ class Board
   def print
     Board.print_grid(hidden_ships_grid)
   end
-
 end

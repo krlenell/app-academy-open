@@ -1,7 +1,6 @@
 class Array
-
   def my_each(&proc)
-    self.length.times do |i|
+    length.times do |i|
       proc.call(self[i])
     end
 
@@ -10,7 +9,7 @@ class Array
 
   def my_select(&prc)
     res = []
-    self.length.times do |i|
+    length.times do |i|
       res << self[i] if prc.call(self[i])
     end
     res
@@ -18,14 +17,14 @@ class Array
 
   def my_reject(&prc)
     res = []
-    self.length.times do |i|
-      res << self[i] if !prc.call(self[i])
+    length.times do |i|
+      res << self[i] unless prc.call(self[i])
     end
     res
   end
 
   def my_any?(&prc)
-    self.my_each do |i|
+    my_each do |i|
       return true if prc.call(i)
     end
     false
@@ -34,7 +33,7 @@ class Array
   def my_flatten
     flattened = []
 
-    self.my_each do |el|
+    my_each do |el|
       if el.is_a?(Array)
         flattened.concat(el.flatten)
       else
@@ -48,7 +47,7 @@ class Array
   def my_zip(*arrays)
     zip = []
 
-    self.length.times do |i|
+    length.times do |i|
       subarray = [self[i]]
 
       arrays.my_each do |array|
@@ -61,16 +60,16 @@ class Array
   end
 
   # pretty sure this is wrong
-  def my_rotate(pos=1)
-    split = pos % self.length
+  def my_rotate(pos = 1)
+    split = pos % length
 
-    self.drop(split) + self.take(split)
+    drop(split) + take(split)
   end
 
-  def my_join(char='')
-    res = "#{self[0]}"
+  def my_join(char = '')
+    res = (self[0]).to_s
 
-    (1..self.length).each do |i|
+    (1..length).each do |i|
       res += char
       res += self[i]
     end
@@ -79,14 +78,9 @@ class Array
 
   def my_reverse
     res = []
-    self.my_each do |el|
+    my_each do |el|
       res.unshift el
     end
     res
   end
-
-
-
-
-
 end

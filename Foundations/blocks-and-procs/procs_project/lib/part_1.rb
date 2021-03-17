@@ -12,9 +12,7 @@ def my_select(arr, &prc)
   res = []
 
   arr.each do |i|
-    if prc.call(i)
-      res << i
-    end
+    res << i if prc.call(i)
   end
   res
 end
@@ -22,36 +20,28 @@ end
 def my_count(arr, &prc)
   res = 0
   arr.each do |i|
-    if prc.call(i)
-      res += 1
-    end
+    res += 1 if prc.call(i)
   end
   res
 end
 
 def my_any?(arr, &prc)
   arr.each do |i|
-    if prc.call(i)
-      return true
-    end
+    return true if prc.call(i)
   end
   false
 end
 
 def my_all?(arr, &prc)
   arr.each do |i|
-    if !prc.call(i)
-      return false
-    end
+    return false unless prc.call(i)
   end
   true
 end
 
 def my_none?(arr, &prc)
   arr.each do |i|
-    if prc.call(i)
-      return false
-    end
+    return false if prc.call(i)
   end
   true
 end

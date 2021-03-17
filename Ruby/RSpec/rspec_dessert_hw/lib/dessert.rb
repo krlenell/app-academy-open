@@ -13,6 +13,7 @@ class Dessert
 
   def initialize(type, quantity, chef)
     raise ArgumentError unless quantity.is_a?(Integer)
+
     @type = type
     @quantity = quantity
     @chef = chef
@@ -33,7 +34,8 @@ class Dessert
   end
 
   def eat(amount)
-    raise "not enough left!" if @quantity - amount < 0
+    raise 'not enough left!' if @quantity - amount < 0
+
     @quantity -= amount
   end
 

@@ -15,6 +15,7 @@ class Chef
   end
 
   private
+
   def put_in_oven(dessert)
     dessert.heat!
   end

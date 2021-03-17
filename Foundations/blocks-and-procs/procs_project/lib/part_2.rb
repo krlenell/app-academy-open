@@ -1,5 +1,5 @@
 def reverser(str, &prc)
-  prc.(str.reverse)
+  prc.call(str.reverse)
 end
 
 def greater_proc_value(num, prc1, prc2)
@@ -25,11 +25,11 @@ end
 def alternating_mapper(arr, prc1, prc2)
   res = []
   arr.each_with_index do |ele, i|
-    if i.even?
-      res << prc1.call(ele)
-    else
-      res << prc2.call(ele)
-    end
+    res << if i.even?
+             prc1.call(ele)
+           else
+             prc2.call(ele)
+           end
   end
   res
 end

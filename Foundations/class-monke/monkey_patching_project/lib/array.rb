@@ -1,57 +1,60 @@
 # Monkey-Patch Ruby's existing Array class to add your own custom methods
 class Array
   def span
-    return nil if self.length == 0
-    return self.max - self.min
+    return nil if length == 0
+
+    max - min
   end
 
   def average
-    return nil if self.length  == 0
-    self.sum / (self.length * 1.0)
+    return nil if length == 0
+
+    sum / (length * 1.0)
   end
 
   def median
-    sorted = self.sort
+    sorted = sort
     length = self.length
     if self.length == 0
       nil
-    elsif length % 2 == 1
+    elsif length.odd?
       sorted[length / 2]
-    else length % 2 == 0
+    else
+      length.even?
       [sorted[length / 2], sorted[length / 2 - 1]].sum / 2.0
     end
   end
 
   def counts
     hash = Hash.new(0)
-    self.each {|ele| hash[ele] += 1}
+    each { |ele| hash[ele] += 1 }
     hash
   end
 
   def my_count(value)
     count = 0
-    self.each {|ele| count += 1 if ele == value}
+    each { |ele| count += 1 if ele == value }
     count
   end
 
   def my_index(value)
-    self.each_with_index {|ele, idx| return idx if ele == value}
+    each_with_index { |ele, idx| return idx if ele == value }
     nil
   end
 
   def my_uniq
     hash = {}
-    self.each {|ele| hash[ele] = true}
+    each { |ele| hash[ele] = true }
     hash.keys
   end
 
   def my_transpose
     res = []
 
-    self.each_with_index do |inner, idx|
+    each_with_index do |_inner, idx|
       row = []
 
-      self.each_with_index do |ele, idx2|
+      each_with_index do |_ele, idx2|
         row << self[idx2][idx]
       end
 
