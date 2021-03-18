@@ -30,14 +30,18 @@ describe Dessert do
   describe '#add_ingredient' do
     it 'adds an ingredient to the ingredients array' do
       dessert.add_ingredient('Ice')
-      expect(dessert.ingredients[0]).to eq('Ice')
       dessert.add_ingredient('Cream')
+      expect(dessert.ingredients[0]).to eq('Ice')
       expect(dessert.ingredients[1]).to eq('Cream')
     end
   end
 
   describe '#mix!' do
+      # dessert.add_ingredient('Ice')
+      # dessert.add_ingredient('Cream')
+      # dessert.add_ingredient('Shake')
     it 'shuffles the ingredient array'
+
   end
 
   describe '#eat' do
