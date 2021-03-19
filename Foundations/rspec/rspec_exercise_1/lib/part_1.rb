@@ -1,16 +1,16 @@
-def average (a, b)
+def average(a, b)
   (a + b) / 2.0
 end
 
 def average_array(arr)
   length = arr.length.to_f
-  sum = arr.inject {|acc, i| acc + i}
+  sum = arr.inject { |acc, i| acc + i }
   sum / length
 end
 
 def repeat(str, num)
   res = ''
-  num.times {res << str}
+  num.times { res << str }
   res
 end
 
@@ -23,11 +23,11 @@ def alternating_case(str)
   arr = str.split ' '
   new_arr = []
   arr.each_with_index do |word, i|
-    if i % 2 == 0
-      new_arr << word.upcase
-    else
-      new_arr << word
-    end
+    new_arr << if i.even?
+                 word.upcase
+               else
+                 word
+               end
   end
-  new_arr.join' '
+  new_arr.join ' '
 end

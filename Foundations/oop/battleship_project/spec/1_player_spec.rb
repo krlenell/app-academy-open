@@ -1,19 +1,19 @@
-require "player"
+require 'player'
 
+describe 'Player' do
+  let(:player) { Player.new }
 
-describe "Player" do
-  let (:player) { Player.new }
-  describe "PART 3" do
-    describe "#get_move" do
-      it "should print 'enter a position with coordinates separated with a space like `4 7`'" do
-        input = double("4 7\n", :chomp=>"4 7")
+  describe 'PART 3' do
+    describe '#get_move' do
+      it "prints 'enter a position with coordinates separated with a space like `4 7`'" do
+        input = double("4 7\n", chomp: '4 7')
         allow(player).to receive(:gets).and_return(input)
 
         expect { player.get_move }.to output(/enter a position/).to_stdout
       end
 
-      it "it should call gets.chomp to get input from the user" do
-        input = double("4 7\n", :chomp=>"4 7")
+      it 'calls gets.chomp to get input from the user' do
+        input = double("4 7\n", chomp: '4 7')
         allow(player).to receive(:gets).and_return(input)
 
         expect(input).to receive(:chomp)
@@ -21,12 +21,12 @@ describe "Player" do
         player.get_move
       end
 
-      it "should return an array containing the player's two input numbers as integers" do
-        input_1 = double("4 7\n", :chomp=>"4 7")
+      it "returns an array containing the player's two input numbers as integers" do
+        input_1 = double("4 7\n", chomp: '4 7')
         allow(player).to receive(:gets).and_return(input_1)
         expect(player.get_move).to eq([4, 7])
 
-        input_2 = double("1 0\n", :chomp=>"1 0")
+        input_2 = double("1 0\n", chomp: '1 0')
         allow(player).to receive(:gets).and_return(input_2)
         expect(player.get_move).to eq([1, 0])
       end

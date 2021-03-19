@@ -6,6 +6,6 @@ def swapper(arr, a, b)
   arr[a], arr[b] = arr[b], arr[a]
   arr
 end
-p swapper(["a", "b", "c", "d"], 0, 2)               # => ["c", "b", "a", "d"]
-p swapper(["a", "b", "c", "d"], 3, 1)               # => ["a", "d", "c", "b"]
-p swapper(["canal", "broadway", "madison"], 1, 0)   # => ["broadway", "canal", "madison"]
+p swapper(%w[a b c d], 0, 2)               # => ["c", "b", "a", "d"]
+p swapper(%w[a b c d], 3, 1)               # => ["a", "d", "c", "b"]
+p swapper(%w[canal broadway madison], 1, 0)   # => ["broadway", "canal", "madison"]

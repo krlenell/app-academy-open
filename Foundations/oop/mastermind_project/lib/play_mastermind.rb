@@ -3,13 +3,11 @@
 # After you complete all specs, you can simulate your game by
 # running this file with `ruby lib/play_mastermind.rb` in your terminal!
 
-require_relative "mastermind"
+require_relative 'mastermind'
 
-puts "Enter a size for the game: "
+puts 'Enter a size for the game: '
 mastermind = Mastermind.new(gets.chomp.to_i)
 
-until (mastermind.ask_user_for_guess) do
-  puts "-------------------------"
-end
+puts '-------------------------' until mastermind.ask_user_for_guess
 
-puts "You win!"
+puts 'You win!'

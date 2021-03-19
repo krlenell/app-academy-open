@@ -1,11 +1,8 @@
 # primes.rb
 
 def prime?(num)
-
   (2...num).each do |idx|
-    if num % idx == 0
-      return false
-    end
+    return false if num % idx == 0
   end
   true
 end
@@ -13,11 +10,7 @@ end
 def primes(num_primes)
   ps = []
   num = 1
-  while ps.count < num_primes
-    ps << num if prime?(num)
-  end
+  ps << num if prime?(num) while ps.count < num_primes
 end
 
-if __FILE__ == $PROGRAM_NAME
-  puts primes(100)
-end
+puts primes(100) if __FILE__ == $PROGRAM_NAME

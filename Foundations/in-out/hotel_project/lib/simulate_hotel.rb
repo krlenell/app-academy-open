@@ -3,11 +3,11 @@
 # After you complete all specs, you can simulate your hotel by
 # running this file with `ruby lib/simulate_hotel.rb` in your terminal!
 
-require_relative "hotel"
-require_relative "room"
+require_relative 'hotel'
+require_relative 'room'
 
-print "Enter a name for the hotel: "
-hotel = Hotel.new(gets.chomp, "Hopper"=> 2, "Lovelace"=> 2, "Turing"=>1)
+print 'Enter a name for the hotel: '
+hotel = Hotel.new(gets.chomp, 'Hopper' => 2, 'Lovelace' => 2, 'Turing' => 1)
 
 puts "\nWelcome to #{hotel.name}!"
 
@@ -17,13 +17,13 @@ while hotel.has_vacancy?
 
   puts "\n---Rooms and Remaining Spaces---"
   hotel.list_rooms
-  puts "--------------------------------"
+  puts '--------------------------------'
 
   print "\nEnter a room name to check into: "
   entered_room = gets.chomp
   until hotel.room_exists?(entered_room)
     puts "That room doesn't exist."
-    print "Enter another a room name: "
+    print 'Enter another a room name: '
     entered_room = gets.chomp
   end
 
@@ -31,7 +31,7 @@ while hotel.has_vacancy?
 
   puts "\n---Rooms and Current Occupants--"
   hotel.rooms.each { |name, room| puts "#{name} : #{room.occupants}" }
-  puts "--------------------------------"
+  puts '--------------------------------'
 end
 
 puts "\nAll rooms are full! #{hotel.name} is now closed."

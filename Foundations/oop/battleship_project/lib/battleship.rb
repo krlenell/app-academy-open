@@ -1,5 +1,5 @@
-require_relative "board"
-require_relative "player"
+require_relative 'board'
+require_relative 'player'
 
 class Battleship
   attr_reader :board, :player
@@ -40,7 +40,7 @@ class Battleship
 
   def turn
     pos = @player.get_move
-    @remaining_misses -= 1 if !@board.attack(pos)
+    @remaining_misses -= 1 unless @board.attack(pos)
     puts "remaining misses: #{@remaining_misses}"
     @board.print
   end

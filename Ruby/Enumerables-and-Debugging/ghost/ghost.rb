@@ -3,11 +3,10 @@ require 'set'
 require_relative 'player'
 
 class Ghost
-  ALPHABET = Set.new("a".."z")
-
+  ALPHABET = Set.new('a'..'z')
 
   def initialize(p1, p2)
-    words = File.readlines("dictionary.txt").map(&:chomp)
+    words = File.readlines('dictionary.txt').map(&:chomp)
     @losses = 0
     @dictionary = Set.new(words)
     @fragment = ''
@@ -15,18 +14,15 @@ class Ghost
   end
 
   def play_round
-
     # until word
     word = false
-    until word do
+    until word
       take_turn
-      if is_word?(fragment)
-        word = true
-      end
+      word = true if is_word?(fragment)
       next_player!
     end
     puts "#{previous_player.name} made the word, #{fragment.upcase}"
-    puts "And loses"
+    puts 'And loses'
     # should get guess from player
     # check if valid
     # check if word
@@ -35,7 +31,7 @@ class Ghost
     # end game
   end
 
-  #private
+  # private
 
   attr_reader :players, :dictionary, :fragment
 
@@ -60,11 +56,11 @@ class Ghost
     return false unless ALPHABET.include?(letter)
 
     check = fragment + letter
-    dictionary.any? {|word| word.start_with?(check)}
+    dictionary.any? { |word| word.start_with?(check) }
   end
 
   def take_turn
-    system("clear")
+    system('clear')
     letter = nil
 
     until letter
@@ -82,13 +78,11 @@ class Ghost
   def is_word?(frag)
     dictionary.include?(frag)
   end
-
-
 end
 
 # if __FILE__ == $PROGRAM_NAME
-  $ghost = Ghost.new(
-    Player.new("Uzair"),
-    Player.new("Cody")
-  )
+$ghost = Ghost.new(
+  Player.new('Uzair'),
+  Player.new('Cody')
+)
 # end

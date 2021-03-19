@@ -3,13 +3,13 @@
 # After you complete all specs, you can play your game by
 # running this file with `ruby lib/play_battleship.rb` in your terminal!
 
-require_relative "battleship"
+require_relative 'battleship'
 
-puts "Enter a size for the game: "
+puts 'Enter a size for the game: '
 battleship = Battleship.new(gets.chomp.to_i)
 battleship.start_game
 
-until battleship.game_over? do
-  puts "-------------------------"
+until battleship.game_over?
+  puts '-------------------------'
   battleship.turn
 end

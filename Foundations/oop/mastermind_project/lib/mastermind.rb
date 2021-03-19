@@ -1,4 +1,4 @@
-require_relative "code"
+require_relative 'code'
 
 class Mastermind
   def initialize(length)
@@ -11,7 +11,7 @@ class Mastermind
   end
 
   def ask_user_for_guess
-    p "Enter a code:"
+    p 'Enter a code:'
     input = gets.chomp
     code = Code.from_string(input)
     print_matches code

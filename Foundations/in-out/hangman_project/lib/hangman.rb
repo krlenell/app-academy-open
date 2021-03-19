@@ -1,10 +1,9 @@
 class Hangman
-  DICTIONARY = ["cat", "dog", "bootcamp", "pizza"]
+  DICTIONARY = %w[cat dog bootcamp pizza]
 
   def self.random_word
     DICTIONARY.sample
   end
-
 
   def initialize
     @secret_word = Hangman.random_word
@@ -13,17 +12,7 @@ class Hangman
     @remaining_incorrect_guesses = 5
   end
 
-  def guess_word
-    @guess_word
-  end
-
-  def attempted_chars
-    @attempted_chars
-  end
-
-  def remaining_incorrect_guesses
-    @remaining_incorrect_guesses
-  end
+  attr_reader :guess_word, :attempted_chars, :remaining_incorrect_guesses
 
   def already_attempted?(char)
     @attempted_chars.include?(char)
@@ -45,25 +34,25 @@ class Hangman
   end
 
   def try_guess(char)
-    if self.already_attempted?(char)
+    if already_attempted?(char)
       p 'that has already been attempted'
-      return false
+      false
     else
       @attempted_chars << char
-      indices = self.get_matching_indices(char)
+      indices = get_matching_indices(char)
       if indices.length == 0
         @remaining_incorrect_guesses -= 1
       else
-        self.fill_indices(char, indices)
+        fill_indices(char, indices)
       end
       true
     end
   end
 
   def ask_user_for_guess
-    print "Enter a char:"
+    print 'Enter a char:'
     input = gets.chomp
-    self.try_guess(input)
+    try_guess(input)
   end
 
   def win?
@@ -85,7 +74,7 @@ class Hangman
   end
 
   def game_over?
-    if self.lose? || self.win?
+    if lose? || win?
       p @secret_word
       true
     else

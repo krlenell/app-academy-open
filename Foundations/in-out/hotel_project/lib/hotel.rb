@@ -1,4 +1,4 @@
-require_relative "room"
+require_relative 'room'
 
 class Hotel
   def initialize(name, hash)
@@ -11,12 +11,10 @@ class Hotel
   end
 
   def name
-    @name.split.map(&:capitalize).join(" ")
+    @name.split.map(&:capitalize).join(' ')
   end
 
-  def rooms
-    @rooms
-  end
+  attr_reader :rooms
 
   def room_exists?(name)
     @rooms.has_key?(name)
@@ -24,19 +22,19 @@ class Hotel
 
   def check_in(person, name)
     if !room_exists?(name)
-      p "sorry, room does not exist"
+      p 'sorry, room does not exist'
     else
       success = @rooms[name].add_occupant(person)
       if success
-        p "check in successful"
+        p 'check in successful'
       else
-        p "sorry, room is full"
+        p 'sorry, room is full'
       end
     end
   end
 
   def has_vacancy?
-    @rooms.values.any? {|room| !room.full?}
+    @rooms.values.any? { |room| !room.full? }
   end
 
   def list_rooms
